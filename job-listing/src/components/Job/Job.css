@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .features button {
+        @apply bg-Light-Grayish-Cyan text-Desaturated-Dark-Cyan font-bold h-8 px-2 rounded-md flex items-center justify-center text-center hover:bg-Desaturated-Dark-Cyan hover:text-white duration-300;
+    }
+
+    
+}

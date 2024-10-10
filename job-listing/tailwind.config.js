@@ -12,7 +12,8 @@ export default {
                 "Light-Grayish-Cyan-Filter": "hsl(180, 31%, 95%)",
                 "Dark-Grayish-Cyan": "hsl(180, 8%, 52%)",
                 "Very-Dark-Grayish-Cyan": "hsl(180, 14%, 20%)",
-                "shadow": "hsl(180deg 29% 50% / 60%)"
+                "shadow": "hsl(180deg 29% 50% / 60%)",
+                "border": "hsl(180deg 3.99% 44.82% / 27%)"
             },
             fontFamily: {
                 "spartan": ["League Spartan", "sans-serif"]

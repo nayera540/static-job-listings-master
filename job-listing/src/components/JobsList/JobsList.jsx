@@ -1,12 +1,11 @@
 import Job from '../Job/Job';
 import './JobsList.css'
-import jobs from '/public/data.json';
 
-function JobsList() {
+function JobsList({jobs, dispatch, isFiltered}) {
     return (
-        <div className='mt-14'>
+        <div className={`${isFiltered? "mt-2":"mt-14"}`}>
             {jobs.map((job) => (
-                <Job job={job} key={job.id} />
+                <Job job={job} key={job.id} dispatch={dispatch}/>
             ))}
         </div>
     )

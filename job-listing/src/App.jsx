@@ -5,6 +5,7 @@ import { useReducer } from "react";
 
 const initialState = {
     filteredItems: [],
+    allJobs: jobs,
     jobs: jobs,
 };
 
@@ -23,8 +24,6 @@ function filterReducer(state, action) {
             return {
                 ...state,
                 jobs: state.jobs.filter((job) => {
-                    console.log(job);
-
                     if (action.payload.category === "role") {
                         return job.role === action.payload.value;
                     }
@@ -41,8 +40,46 @@ function filterReducer(state, action) {
                 filteredItems: updateFilterItems,
             };
         }
-        case "Remove_Filter":
-            return;
+
+        case "Remove_Filter": {
+            const updatedFilterItems = state.filteredItems.filter(
+                (item) => !(item.category === action.payload.category && item.value === action.payload.value)
+            );
+
+            if (updatedFilterItems.length === 0) {
+                return {
+                    ...state,
+                    jobs: state.allJobs, 
+                    filteredItems: updatedFilterItems,
+                };
+            }
+
+            const filteredJobs = state.allJobs.filter((job) => {
+                return updatedFilterItems.every((filter) => {
+                    if (filter.category === "role") {
+                        return job.role === filter.value;
+                    }
+                    if (filter.category === "level") {
+                        return job.level === filter.value;
+                    }
+                    if (filter.category === "tools") {
+                        return job.tools && job.tools.some((tool) => tool === filter.value);
+                    }
+                    if (filter.category === "languages") {
+                        return job.languages && job.languages.some((lang) => lang === filter.value);
+                    }
+                    return true;
+                });
+            });
+
+            return {
+                ...state,
+                jobs: filteredJobs, 
+                filteredItems: updatedFilterItems,
+            };
+        }
+
+
         case "Clear_Filter":
             return { ...initialState };
         default:
